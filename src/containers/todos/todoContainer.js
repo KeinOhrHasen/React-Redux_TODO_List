@@ -1,24 +1,19 @@
-import React, { Component } from 'react';
-import * as TodoActions from '../actions/todoActions'
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
-import TodoTable from '../components/todoTable';
-
+import React, { Component } from "react"
+import { bindActionCreators } from "redux"
+import { connect } from "react-redux"
+import { PropTypes } from "prop-types"
+import * as TodoActions from "../../actions/todoActions"
+import TodoTable from "../../components/todos/todoTable"
+import Logout from "../authorization/logout"
 
 
 export class TodoContainer extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     // Todo Container methods dispatch the actions to the reducer functions. Ordered by CRUD Order
 
     //Create
     createTodo = (todo) => {
-        this.props.actions.CreateTodo(todo)
+        this.props.actions.CreateTodo(todo) 
     }
-
 
     // No methods for reading, the first loading of data is done in App.js where the
     // getTodo Action is dispatched
@@ -33,8 +28,11 @@ export class TodoContainer extends Component {
     editTodo = (todo) => {
         this.props.actions.UpdateTodo(todo)
     }
-    completeTodo = (todo) => {
-        this.props.actions.UpdateTodo({...todo, status: 'done'})
+    completeTodoTougle = (todo) => {
+        if (!todo.completed){
+            this.props.actions.UpdateTodo({...todo, completed: true})}
+        else {this.props.actions.UpdateTodo({...todo, completed: false})
+        }
     }
 
     //Delete
@@ -43,17 +41,16 @@ export class TodoContainer extends Component {
     }
 
     render() {
-        console.log(this.props.todos);
-
         return (
             <div className="todo-container">
+                <Logout></Logout>
                 <TodoTable
                     todos={this.props.todos}
                     createTodo={this.createTodo}
                     startEditing={this.startEditing}
                     cancelEditing={this.cancelEditing}
                     editTodo={this.editTodo}
-                    completeTodo = {this.completeTodo}
+                    completeTodoTougle = {this.completeTodoTougle}
                     deleteTodo = {this.deleteTodo}
                 />
             </div>
@@ -74,6 +71,7 @@ function mapStateToProps(state, ownProps) {
     return {
         todos: state.todos
     }
+
 }
 
 // This maps the dispatch to the property of the component
@@ -88,3 +86,6 @@ function mapDispatchToProps(dispatch) {
 // Without this the Component wont be functional.
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoContainer);
+
+
+

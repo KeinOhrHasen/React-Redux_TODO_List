@@ -1,7 +1,7 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import RenderField from "../../containers/authorization/myInput";
-import {correctName, correctPassword} from "../../containers/authorization/signUpValidation";
+import React from "react"
+import { Field, reduxForm } from "redux-form"
+import RenderField from "../../containers/authorization/myInput"
+import {correctName, correctPassword} from "../../containers/authorization/signUpValidation"
 
 let LoginForm = props => {
   const { handleSubmit, pristine, submitting } = props;

@@ -1,7 +1,7 @@
-import React from "react";
-import { Field, reduxForm } from "redux-form";
-import RenderField from "../../containers/authorization/myInput";
-import {correctName, correctPassword, matchInput} from "../../containers/authorization/signUpValidation";
+import React from "react"
+import { Field, reduxForm } from "redux-form"
+import RenderField from "../../containers/authorization/myInput"
+import {correctName, correctPassword, matchInput} from "../../containers/authorization/signUpValidation"
 
 
 let SignUpForm = props => {

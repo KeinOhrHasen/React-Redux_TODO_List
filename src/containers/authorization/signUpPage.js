@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {bindActionCreators} from "redux";
 import SignUpForm from "../../components/authorization/signUpForm";
-import { registerUser } from "../../../../actions/authentication";
+import { registerUser } from "../../actions/authentication";
 
 class SignUpPage extends React.Component {
   
