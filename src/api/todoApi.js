@@ -1,34 +1,36 @@
-import {HttpClient} from './httpClient' 
+import {HttpClient} from "./httpClient"
+import {API_BASE} from "../constants/API"
 
-// This is the API. The backend root URL can be set from here.
-
-const API = 'https://node--api.herokuapp.com'
+let userToken = localStorage.getItem("token");
 
 //Setting the todos URI
 
-const TODO_API = `${API}/todos`
+const TODO_API = `${API_BASE}/todos`
 
 // The CRUD Operations of the Todo Resource.
 
 
 //Create
 const createTodo = todo => {
-    return HttpClient.post(TODO_API, todo)
+    console.log(todo)
+    return HttpClient.post(TODO_API, userToken, todo)
 }
 
 //Read
 const getTodo = () => {
-    return HttpClient.get(TODO_API)
+    return HttpClient.get(TODO_API, userToken );
 }
 
 //Update
 const updateTodo = todo => {
-    return HttpClient.put(TODO_API, todo)
+    let todosId = todo.id
+    return HttpClient.put(`${TODO_API}/${todosId}`, userToken, todo)
 }
 
 //Delete
 const removeTodo = todo => {
-    return HttpClient.delete(`${TODO_API}/${todo._id}`)
+    let todosId = todo.id
+    return HttpClient.delete(`${TODO_API}/${todosId}`, userToken)
 }
 
 
